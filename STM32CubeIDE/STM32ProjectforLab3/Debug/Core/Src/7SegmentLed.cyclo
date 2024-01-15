@@ -1,0 +1,6 @@
+7SegmentLed.c:15:6:display_number_on_led_1	11
+7SegmentLed.c:117:6:display_number_on_led_2	11
+7SegmentLed.c:219:6:scan_led_1	7
+7SegmentLed.c:258:6:scan_led_2	7
+7SegmentLed.c:297:6:update_led_buffer_1	1
+7SegmentLed.c:303:6:update_led_buffer_2	1

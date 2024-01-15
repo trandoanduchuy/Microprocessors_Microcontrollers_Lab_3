@@ -1,0 +1,35 @@
+/*
+ * button.c
+ *
+ *  Created on: Dec 13, 2023
+ *      Author: Huy
+ */
+#include "button.h"
+#include "main.h"
+
+int button_normal_pressed_flag = 0;
+
+int isButtonNormalPressed(void)
+{
+	if(button_normal_pressed_flag == 1)
+	{
+		button_normal_pressed_flag = 0;
+		return 1;
+	}
+	return 0;
+}
+
+void subKeyProcessNormal(void)
+{
+	button_normal_pressed_flag = 1;
+}
+
+int KeyReg0 = NORMAL_STATE;
+int KeyReg1 = NORMAL_STATE;
+int KeyReg2 = NORMAL_STATE;
+int KeyReg3 = NORMAL_STATE;
+
+void getKeyInput(void)
+{
+
+}

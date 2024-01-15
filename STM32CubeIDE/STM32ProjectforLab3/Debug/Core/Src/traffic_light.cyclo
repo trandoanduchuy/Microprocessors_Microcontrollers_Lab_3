@@ -1,0 +1,7 @@
+traffic_light.c:22:6:traffic_light_run	12
+traffic_light.c:103:6:control_time	4
+traffic_light.c:120:6:main_system	10
+traffic_light.c:186:6:increase_led_red_duration	4
+traffic_light.c:208:6:increase_led_yellow_duration	4
+traffic_light.c:229:6:increase_led_green_duration	4
+traffic_light.c:250:6:update_temp_duration	1

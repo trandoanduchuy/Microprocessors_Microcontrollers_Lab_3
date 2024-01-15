@@ -21,7 +21,11 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "software_timer.h"
+#include "software_timer.h"	/* Library for software timer*/
+#include "button.h"			/* Library for button processing*/
+#include "7SegmentLed.h"
+#include "led.h"
+#include "traffic_light.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -94,17 +98,20 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  setTimer1(1000);
+  setTimer4(1000); /*Init software timer for traffic light run*/
   while (1)
   {
-	  if(timer1_flag == 1)
-	  {
-		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
-		  setTimer1(1000);
-	  }
-//	  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
-//	  HAL_Delay(1000);
+//	  if(isButtonPressed_2() == 1)
+//	  {
+//		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+//	  }
+	  blink_led_red();
+//	  control_time();
+	  main_system();
+//	  traffic_light_run();
 
+//	  display_number_on_led_1(traffic1_counter);
+//	  display_number_on_led_2(traffic2_counter);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -205,17 +212,50 @@ static void MX_GPIO_Init(void)
 /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, EN_0_Pin|EN_1_Pin|EN_2_Pin|EN_3_Pin
+                          |LED_RED_Pin|LED_RED_1_Pin|LED_YELLOW_1_Pin|LED_GREEN_1_Pin
+                          |LED_RED_2_Pin|LED_YELLOW_2_Pin|LED_GREEN_2_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : LED_RED_Pin */
-  GPIO_InitStruct.Pin = LED_RED_Pin;
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, SEG_0_1_Pin|SEG_1_1_Pin|SEG_2_1_Pin|SEG_3_2_Pin
+                          |SEG_4_2_Pin|SEG_5_2_Pin|SEG_6_2_Pin|SEG_3_1_Pin
+                          |SEG_4_1_Pin|SEG_5_1_Pin|SEG_6_1_Pin|SEG_0_2_Pin
+                          |SEG_1_2_Pin|SEG_2_2_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : BUTTON_1_Pin BUTTON_2_Pin BUTTON_3_Pin */
+  GPIO_InitStruct.Pin = BUTTON_1_Pin|BUTTON_2_Pin|BUTTON_3_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : EN_0_Pin EN_1_Pin EN_2_Pin EN_3_Pin
+                           LED_RED_Pin LED_RED_1_Pin LED_YELLOW_1_Pin LED_GREEN_1_Pin
+                           LED_RED_2_Pin LED_YELLOW_2_Pin LED_GREEN_2_Pin */
+  GPIO_InitStruct.Pin = EN_0_Pin|EN_1_Pin|EN_2_Pin|EN_3_Pin
+                          |LED_RED_Pin|LED_RED_1_Pin|LED_YELLOW_1_Pin|LED_GREEN_1_Pin
+                          |LED_RED_2_Pin|LED_YELLOW_2_Pin|LED_GREEN_2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LED_RED_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : SEG_0_1_Pin SEG_1_1_Pin SEG_2_1_Pin SEG_3_2_Pin
+                           SEG_4_2_Pin SEG_5_2_Pin SEG_6_2_Pin SEG_3_1_Pin
+                           SEG_4_1_Pin SEG_5_1_Pin SEG_6_1_Pin SEG_0_2_Pin
+                           SEG_1_2_Pin SEG_2_2_Pin */
+  GPIO_InitStruct.Pin = SEG_0_1_Pin|SEG_1_1_Pin|SEG_2_1_Pin|SEG_3_2_Pin
+                          |SEG_4_2_Pin|SEG_5_2_Pin|SEG_6_2_Pin|SEG_3_1_Pin
+                          |SEG_4_1_Pin|SEG_5_1_Pin|SEG_6_1_Pin|SEG_0_2_Pin
+                          |SEG_1_2_Pin|SEG_2_2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
@@ -225,6 +265,9 @@ static void MX_GPIO_Init(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	timerRun();
+	getKeyInput_1();
+	getKeyInput_2();
+	getKeyInput_3();
 }
 /* USER CODE END 4 */
 

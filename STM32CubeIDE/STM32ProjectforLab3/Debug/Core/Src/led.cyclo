@@ -1,0 +1,4 @@
+led.c:11:6:blink_led_red	7
+led.c:42:6:blink_all_led_red	7
+led.c:91:6:blink_all_led_yellow	7
+led.c:140:6:blink_all_led_green	7

@@ -1,0 +1,19 @@
+/*
+ * 7SegmentLed.h
+ *
+ *  Created on: Jan 11, 2024
+ *      Author: Huy
+ */
+
+#ifndef INC_7SEGMENTLED_H_
+#define INC_7SEGMENTLED_H_
+
+#include "global.h"
+
+/*Function to display a number on led*/
+void display7SEG(int num);
+
+/*Function to display a number on led*/
+void DisplayNumberOnLed2(int num);
+
+#endif /* INC_7SEGMENTLED_H_ */

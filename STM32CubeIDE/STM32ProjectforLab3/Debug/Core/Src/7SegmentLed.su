@@ -1,0 +1,6 @@
+../Core/Src/7SegmentLed.c:15:6:display_number_on_led_1	16	static
+../Core/Src/7SegmentLed.c:117:6:display_number_on_led_2	16	static
+../Core/Src/7SegmentLed.c:219:6:scan_led_1	8	static
+../Core/Src/7SegmentLed.c:258:6:scan_led_2	8	static
+../Core/Src/7SegmentLed.c:297:6:update_led_buffer_1	16	static
+../Core/Src/7SegmentLed.c:303:6:update_led_buffer_2	16	static

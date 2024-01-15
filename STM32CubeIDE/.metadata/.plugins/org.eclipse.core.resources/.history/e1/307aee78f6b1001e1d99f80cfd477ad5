@@ -1,0 +1,40 @@
+/*
+ * led.c
+ *
+ *  Created on: Jan 13, 2024
+ *      Author: Huy
+ */
+#include "led.h"
+
+BLINK_LED_RED_STATUS blink_led_red_status = INIT;
+
+void blink_led_red(void)
+{
+	switch(blink_led_red_status)
+	{
+	case BLINK_LED_INIT:
+		HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_SET);
+		blink_led_red_status = ON;
+		setTimer1(1000);
+		break;
+	case BLINK_LED_ON:
+		HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_RESET);
+		if(timer1_flag == 1)
+		{
+			blink_led_red_status = OFF;
+			setTimer1(1000);
+		}
+		break;
+	case BLINK_LED_OFF:
+		HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_SET);
+		if(timer1_flag == 1)
+		{
+			blink_led_red_status = ON;
+			setTimer1(1000);
+		}
+		break;
+	default:
+		break;
+	}
+}
+

@@ -1,0 +1,222 @@
+/*
+ * 7SegmentLed.c
+ *
+ *  Created on: Jan 11, 2024
+ *      Author: Huy
+ */
+#include "7SegmentLed.h"
+
+SCAN_LED_STATUS scan_led_status_1 = INIT;
+SCAN_LED_STATUS scan_led_status_2 = INIT;
+
+int led_buffer_1[2] = {0, 0};
+int led_buffer_2[2] = {0, 0};
+
+void display_number_on_led_1(int num){
+	if( num == 0){
+		HAL_GPIO_WritePin(SEG_0_1_GPIO_Port, SEG_0_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_1_1_GPIO_Port, SEG_1_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_2_1_GPIO_Port, SEG_2_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_3_1_GPIO_Port, SEG_3_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_4_1_GPIO_Port, SEG_4_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_5_1_GPIO_Port, SEG_5_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_6_1_GPIO_Port, SEG_6_1_Pin, GPIO_PIN_SET);
+	}
+
+	if(num == 1){
+		HAL_GPIO_WritePin(SEG_0_1_GPIO_Port, SEG_0_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_1_1_GPIO_Port, SEG_1_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_2_1_GPIO_Port, SEG_2_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_3_1_GPIO_Port, SEG_3_1_Pin, GPIO_PIN_SET );
+		HAL_GPIO_WritePin(SEG_4_1_GPIO_Port, SEG_4_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_5_1_GPIO_Port, SEG_5_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_6_1_GPIO_Port, SEG_6_1_Pin, GPIO_PIN_SET);
+	}
+
+	if(num == 2){
+		HAL_GPIO_WritePin(SEG_0_1_GPIO_Port, SEG_0_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_1_1_GPIO_Port, SEG_1_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_2_1_GPIO_Port, SEG_2_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_3_1_GPIO_Port, SEG_3_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_4_1_GPIO_Port, SEG_4_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_5_1_GPIO_Port, SEG_5_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_6_1_GPIO_Port, SEG_6_1_Pin, GPIO_PIN_RESET);
+	}
+
+	if(num == 3){
+		HAL_GPIO_WritePin(SEG_0_1_GPIO_Port, SEG_0_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_1_1_GPIO_Port, SEG_1_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_2_1_GPIO_Port, SEG_2_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_3_1_GPIO_Port, SEG_3_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_4_1_GPIO_Port, SEG_4_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_5_1_GPIO_Port, SEG_5_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_6_1_GPIO_Port, SEG_6_1_Pin, GPIO_PIN_RESET);
+	}
+
+	if(num == 4){
+		HAL_GPIO_WritePin(SEG_0_1_GPIO_Port, SEG_0_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_1_1_GPIO_Port, SEG_1_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_2_1_GPIO_Port, SEG_2_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_3_1_GPIO_Port, SEG_3_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_4_1_GPIO_Port, SEG_4_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_5_1_GPIO_Port, SEG_5_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_6_1_GPIO_Port, SEG_6_1_Pin, GPIO_PIN_RESET);
+	}
+
+	if(num == 5){
+		HAL_GPIO_WritePin(SEG_0_1_GPIO_Port, SEG_0_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_1_1_GPIO_Port, SEG_1_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_2_1_GPIO_Port, SEG_2_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_3_1_GPIO_Port, SEG_3_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_4_1_GPIO_Port, SEG_4_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_5_1_GPIO_Port, SEG_5_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_6_1_GPIO_Port, SEG_6_1_Pin, GPIO_PIN_RESET);
+	}
+
+	if(num == 6){
+		HAL_GPIO_WritePin(SEG_0_1_GPIO_Port, SEG_0_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_1_1_GPIO_Port, SEG_1_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_2_1_GPIO_Port, SEG_2_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_3_1_GPIO_Port, SEG_3_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_4_1_GPIO_Port, SEG_4_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_5_1_GPIO_Port, SEG_5_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_6_1_GPIO_Port, SEG_6_1_Pin, GPIO_PIN_RESET);
+	}
+
+	if(num == 7){
+		HAL_GPIO_WritePin(SEG_0_1_GPIO_Port, SEG_0_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_1_1_GPIO_Port, SEG_1_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_2_1_GPIO_Port, SEG_2_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_3_1_GPIO_Port, SEG_3_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_4_1_GPIO_Port, SEG_4_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_5_1_GPIO_Port, SEG_5_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_6_1_GPIO_Port, SEG_6_1_Pin, GPIO_PIN_SET);
+	}
+
+	if(num == 8){
+		HAL_GPIO_WritePin(SEG_0_1_GPIO_Port, SEG_0_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_1_1_GPIO_Port, SEG_1_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_2_1_GPIO_Port, SEG_2_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_3_1_GPIO_Port, SEG_3_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_4_1_GPIO_Port, SEG_4_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_5_1_GPIO_Port, SEG_5_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_6_1_GPIO_Port, SEG_6_1_Pin, GPIO_PIN_RESET);
+	}
+
+	if(num == 9){
+		HAL_GPIO_WritePin(SEG_0_1_GPIO_Port, SEG_0_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_1_1_GPIO_Port, SEG_1_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_2_1_GPIO_Port, SEG_2_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_3_1_GPIO_Port, SEG_3_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_4_1_GPIO_Port, SEG_4_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_5_1_GPIO_Port, SEG_5_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_6_1_GPIO_Port, SEG_6_1_Pin, GPIO_PIN_RESET);
+	}
+}
+
+void display_number_on_led_2(int num){
+	if( num == 0){
+		HAL_GPIO_WritePin(SEG_0_2_GPIO_Port, SEG_0_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_1_2_GPIO_Port, SEG_1_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_2_2_GPIO_Port, SEG_2_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_3_2_GPIO_Port, SEG_3_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_4_2_GPIO_Port, SEG_4_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_5_2_GPIO_Port, SEG_5_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_6_2_GPIO_Port, SEG_6_2_Pin, GPIO_PIN_SET);
+	}
+
+	if(num == 1){
+		HAL_GPIO_WritePin(SEG_0_2_GPIO_Port, SEG_0_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_1_2_GPIO_Port, SEG_1_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_2_2_GPIO_Port, SEG_2_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_3_2_GPIO_Port, SEG_3_2_Pin, GPIO_PIN_SET );
+		HAL_GPIO_WritePin(SEG_4_2_GPIO_Port, SEG_4_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_5_2_GPIO_Port, SEG_5_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_6_2_GPIO_Port, SEG_6_2_Pin, GPIO_PIN_SET);
+	}
+
+	if(num == 2){
+		HAL_GPIO_WritePin(SEG_0_2_GPIO_Port, SEG_0_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_1_2_GPIO_Port, SEG_1_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_2_2_GPIO_Port, SEG_2_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_3_2_GPIO_Port, SEG_3_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_4_2_GPIO_Port, SEG_4_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_5_2_GPIO_Port, SEG_5_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_6_2_GPIO_Port, SEG_6_2_Pin, GPIO_PIN_RESET);
+	}
+
+	if(num == 3){
+		HAL_GPIO_WritePin(SEG_0_2_GPIO_Port, SEG_0_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_1_2_GPIO_Port, SEG_1_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_2_2_GPIO_Port, SEG_2_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_3_2_GPIO_Port, SEG_3_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_4_2_GPIO_Port, SEG_4_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_5_2_GPIO_Port, SEG_5_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_6_2_GPIO_Port, SEG_6_2_Pin, GPIO_PIN_RESET);
+	}
+
+	if(num == 4){
+		HAL_GPIO_WritePin(SEG_0_2_GPIO_Port, SEG_0_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_1_2_GPIO_Port, SEG_1_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_2_2_GPIO_Port, SEG_2_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_3_2_GPIO_Port, SEG_3_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_4_2_GPIO_Port, SEG_4_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_5_2_GPIO_Port, SEG_5_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_6_2_GPIO_Port, SEG_6_2_Pin, GPIO_PIN_RESET);
+	}
+
+	if(num == 5){
+		HAL_GPIO_WritePin(SEG_0_2_GPIO_Port, SEG_0_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_1_2_GPIO_Port, SEG_1_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_2_2_GPIO_Port, SEG_2_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_3_2_GPIO_Port, SEG_3_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_4_2_GPIO_Port, SEG_4_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_5_2_GPIO_Port, SEG_5_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_6_2_GPIO_Port, SEG_6_2_Pin, GPIO_PIN_RESET);
+	}
+
+	if(num == 6){
+		HAL_GPIO_WritePin(SEG_0_2_GPIO_Port, SEG_0_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_1_2_GPIO_Port, SEG_1_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_2_2_GPIO_Port, SEG_2_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_3_2_GPIO_Port, SEG_3_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_4_2_GPIO_Port, SEG_4_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_5_2_GPIO_Port, SEG_5_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_6_2_GPIO_Port, SEG_6_2_Pin, GPIO_PIN_RESET);
+	}
+
+	if(num == 7){
+		HAL_GPIO_WritePin(SEG_0_2_GPIO_Port, SEG_0_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_1_2_GPIO_Port, SEG_1_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_2_2_GPIO_Port, SEG_2_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_3_2_GPIO_Port, SEG_3_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_4_2_GPIO_Port, SEG_4_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_5_2_GPIO_Port, SEG_5_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_6_2_GPIO_Port, SEG_6_2_Pin, GPIO_PIN_SET);
+	}
+
+	if(num == 8){
+		HAL_GPIO_WritePin(SEG_0_2_GPIO_Port, SEG_0_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_1_2_GPIO_Port, SEG_1_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_2_2_GPIO_Port, SEG_2_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_3_2_GPIO_Port, SEG_3_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_4_2_GPIO_Port, SEG_4_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_5_2_GPIO_Port, SEG_5_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_6_2_GPIO_Port, SEG_6_2_Pin, GPIO_PIN_RESET);
+	}
+
+	if(num == 9){
+		HAL_GPIO_WritePin(SEG_0_2_GPIO_Port, SEG_0_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_1_2_GPIO_Port, SEG_1_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_2_2_GPIO_Port, SEG_2_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_3_2_GPIO_Port, SEG_3_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_4_2_GPIO_Port, SEG_4_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(SEG_5_2_GPIO_Port, SEG_5_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(SEG_6_2_GPIO_Port, SEG_6_2_Pin, GPIO_PIN_RESET);
+	}
+}
+
+void san_led_1(void)
+{
+	switch(led_index)
+}

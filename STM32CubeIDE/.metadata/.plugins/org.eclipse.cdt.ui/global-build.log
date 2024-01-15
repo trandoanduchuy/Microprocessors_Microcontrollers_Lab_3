@@ -1,6 +1,6 @@
-15:23:36 **** Incremental Build of configuration Debug for project STM32ProjectforLab3 ****
+02:25:45 **** Incremental Build of configuration Debug for project STM32ProjectforLab3 ****
 make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103x6 -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/traffic_light.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103x6 -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/traffic_light.d" -MT"Core/Src/traffic_light.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/traffic_light.o"
 arm-none-eabi-gcc -o "STM32ProjectforLab3.elf" @"objects.list"   -mcpu=cortex-m3 -T"D:\Embedded_Programming\STM\STM32\Microprocessors_Microcontrollers_Lab\Microprocessors_Microcontrollers_Lab_3\STM32CubeIDE\STM32ProjectforLab3\STM32F103C6UX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32ProjectforLab3.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: STM32ProjectforLab3.elf
  
@@ -8,7 +8,7 @@ arm-none-eabi-size   STM32ProjectforLab3.elf
 arm-none-eabi-objdump -h -S  STM32ProjectforLab3.elf  > "STM32ProjectforLab3.list"
 arm-none-eabi-objcopy  -O ihex  STM32ProjectforLab3.elf  "STM32ProjectforLab3.hex"
    text	   data	    bss	    dec	    hex	filename
-   6968	     20	   1652	   8640	   21c0	STM32ProjectforLab3.elf
+  12788	    104	   1728	  14620	   391c	STM32ProjectforLab3.elf
 Finished building: default.size.stdout
  
 Finished building: STM32ProjectforLab3.hex
